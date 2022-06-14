@@ -1,10 +1,11 @@
 {
     "name": "wa-cloud-api-webhook",
     "version": "1.0.0",
-    "description": "Webhook for WhatsApp Cloud API quick start tutorial.",
+    "private": true,
+    "description": "Webhook for WhatsApp Cloud API",
     "main": "app.js",
     "scripts": {
-      "start": "node app.js"
+      "start": "node index.js"
     },
     "author": "Diego Fernando Nieto",
     "license": "ISC",
