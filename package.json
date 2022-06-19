@@ -1,22 +1,23 @@
 {
-    "name": "wa-cloud-api-webhook",
-    "version": "1.0.0",
-    "private": true,
-    "description": "Webhook for WhatsApp Cloud API",
-    "main": "app.js",
-    "scripts": {
-      "start": "node index.js"
-    },
-    "author": "Diego Fernando Nieto",
-    "license": "ISC",
-    "dependencies": {
-      "axios": "^0.27.2",
-      "body-parser": "^1.20.0",
-      "express": "^4.18.1",
-      "request": "^2.88.2"
-    },
-    "engines": {
-      "node": ">=14.x <17",
-      "npm": ">=7.0.0"
-    }
+  "name": "wa-cloud-api-webhook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Webhook for WhatsApp Cloud API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Diego Fernando Nieto",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "request": "^2.88.2"
+  },
+  "engines": {
+    "node": ">=16.x <17",
+    "npm": ">=8.0.0"
   }
+}

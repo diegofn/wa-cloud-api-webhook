@@ -7,23 +7,23 @@
 
 "use strict";
 
-// Access token for your app
-// (copy token from DevX getting started page
-// and save it as environment variable into the .env file)
-const token = process.env.WHATSAPP_TOKEN;
-
 // Imports dependencies and set up http server
 const request = require("request"),
-  express = require("express"),
-  body_parser = require("body-parser"),
-  axios = require("axios").default,
-  app = express().use(body_parser.json()); // creates express http server
+express = require("express"),
+body_parser = require("body-parser"),
+axios = require("axios").default,
+app = express().use(body_parser.json()); // creates express http server
+require('dotenv').config({path: '.env'})
+
+// Set the WhatsApp token and port
+const token = process.env.WHATSAPP_TOKEN;
+const port = process.env.PORT || 1337;
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
+app.listen(port, () => console.log("webhook is listening on port:" + port + " with token: " + token));
 
 // Accepts POST requests at /webhook endpoint
-app.post("/webhook", (req, res) => {
+app.post("/wa-cloud-api-webhook/webhook", (req, res) => {
   // Parse the request body from the POST
   let body = req.body;
 
@@ -46,7 +46,7 @@ app.post("/webhook", (req, res) => {
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
         url:
-          "https://graph.facebook.com/v14.0/" +
+          "https://graph.facebook.com/v13.0/" +
           phone_number_id +
           "/messages?access_token=" +
           token,
@@ -56,7 +56,10 @@ app.post("/webhook", (req, res) => {
           text: { body: "Ack: " + msg_body },
         },
         headers: { "Content-Type": "application/json" },
-      });
+      }).catch(
+        function (error) {
+          console.log(error.toJSON())
+        });
     }
     res.sendStatus(200);
   } else {
@@ -67,7 +70,7 @@ app.post("/webhook", (req, res) => {
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
 // info on verification request payload: https://developers.facebook.com/docs/graph-api/webhooks/getting-started#verification-requests 
-app.get("/webhook", (req, res) => {
+app.get("/wa-cloud-api-webhook/webhook", (req, res) => {
   /**
    * UPDATE YOUR VERIFY TOKEN
    *This will be the Verify Token value when you set up webhook
