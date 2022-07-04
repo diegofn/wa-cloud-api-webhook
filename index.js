@@ -20,7 +20,7 @@ const token = process.env.WHATSAPP_TOKEN;
 const port = process.env.PORT || 1337;
 
 // Sets server port and logs message on success
-app.listen(port, () => console.log("webhook is listening on port:" + port + " with token: " + token));
+app.listen(port, () => console.log("webhook is listening on port: " + port + " with token: " + token));
 
 // Accepts POST requests at /webhook endpoint
 app.post("/wa-cloud-api-webhook/webhook", (req, res) => {
@@ -46,7 +46,7 @@ app.post("/wa-cloud-api-webhook/webhook", (req, res) => {
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
         url:
-          "https://graph.facebook.com/v13.0/" +
+          "https://graph.facebook.com/v14.0/" +
           phone_number_id +
           "/messages?access_token=" +
           token,
